@@ -1,0 +1,52 @@
+.header{
+	width: auto;
+	height: auto;
+}
+
+.addplace{
+	margin-top: 100px;
+	margin-bottom: 50px; 
+}
+
+body{
+	background-color: #eee;
+}
+
+.content{
+	background-color: white;
+}
+
+.content h4{
+	text-align: center;
+    padding-top: 10px;
+}
+
+.input-text textarea{
+	width: 75%;
+	border: 1px solid #ddd;
+	height: 50px;
+}
+
+.input-text label{
+	width: 150px;
+    font-size: 14px;
+}
+
+.input-text input{
+    width: 75%;
+    border: 1px solid #ddd;
+    border-radius: 0;
+}
+
+.Tinh{
+	width: 37%;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    padding: 2px;
+}
+
+#btnaddplace{
+	margin-bottom: 10px;
+	border-radius: 0px;
+}
+

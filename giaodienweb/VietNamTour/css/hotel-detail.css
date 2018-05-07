@@ -1,0 +1,442 @@
+body{
+	background-color: #eee;
+}
+.header{
+	width: auto;
+	height: auto;
+}
+
+.content-detail{
+	margin-top: 105px;
+	margin-bottom: 50px;
+}
+
+a#like01{
+	color: #007bff;
+	cursor: pointer;
+}
+
+#like01:hover{
+	color: red !important;
+}
+
+.like{
+	color: red !important;
+}
+/*======================== style image =========================*/
+
+/*Time to apply widths for accordian to work
+Width of image = 640px
+total images = 5
+so width of hovered image = 640px
+width of un-hovered image = 40px - you can set this to anything
+so total container width = 640 + 40*4 = 800px;
+default width = 800/5 = 160px;
+*/
+
+.accordian {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	
+	/*Time for some styling*/
+	margin: 0px auto;
+	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
+	-webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
+	-moz-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
+}
+
+/*A small hack to prevent flickering on some browsers*/
+.accordian ul {
+	width: 1200px;
+	padding: 0;
+	/*This will give ample space to the last item to move
+	instead of falling down/flickering during hovers.*/
+}
+
+.accordian li {
+	position: relative;
+	display: block;
+	width: 30px;
+	float: left;
+	
+	border-left: 1px solid #888;
+	
+	box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
+	
+	/*Transitions to give animation effect*/
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	/*If you hover on the images now you should be able to 
+	see the basic accordian*/
+}
+
+/*Reduce with of un-hovered elements*/
+.accordian ul:hover li {width: 40px;}
+/*Lets apply hover effects now*/
+/*The LI hover style should override the UL hover style*/
+.accordian ul li:hover {width: 640px;}
+
+
+.accordian li img {
+	display: block;
+	height: 320px;
+	width: 640px;
+}
+
+/*Image title styles*/
+.image_title {
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	left: 0; bottom: 0;	
+width: 640px;	
+
+}
+.image_title a {
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	padding: 20px;
+	font-size: 16px;
+}
+
+/*======================== end style image =========================*/
+
+/*======================== hotel-detail-right ==========================*/
+
+.hotel-detail-right{
+	background-color: white;
+    padding: 10px 25px;
+    height: 320px;
+}
+
+.hotel-detail-right .title p{
+
+font-size: 12px;
+
+margin: 0;
+}
+
+.hotel-detail-right .title h4{font-weight:  800;margin-bottom: 1px;}
+
+.hotel-detail-right .title .star{
+	color: #ffed00;
+	font-size: 13px;
+}
+
+.hotel-body p{
+	text-align: justify;
+	font-size: 13px;
+	height: 60px;
+	overflow:  hidden;
+}
+
+.title p a{
+	color: #d4d2d2 !important;
+}
+
+.hotel-body .service ul{
+	padding: 0;
+	list-style: none;
+}
+
+.hotel-body .service ul li{
+	font-size: 12px;
+	font-weight: 500;
+	position: relative;
+}
+
+.hotel-body .service ul li .icon-f{
+    padding: 6px;
+    padding-right: 10px;
+    display: inline-block;
+}
+
+.hotel-body .service ul li:before{
+	content: "";
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 3px;
+    height: 25px;
+    width: 25px;
+}
+
+/*======================== end hotel-detail-right =======================*/
+
+div.hotel-detail-info{
+	margin-top: 16px;
+	width: 100%;
+}
+
+div.hotel-detail-info ul{
+	position:  relative;
+	float: left;
+	list-style: none;
+	width: 100%;
+	background-color: white;
+	padding: 0;
+	margin-top: 5px;
+	margin-bottom:  5px;
+	height: 70px;
+}
+
+div.hotel-detail-info ul li{
+    position: relative;
+    float: left;
+    list-style: none;
+    width: 25%;
+    /* margin-top: 10px; */
+    /* margin-bottom: 1px; */
+    text-align: center;
+    z-index: 2;
+}
+
+div.hotel-detail-info ul li:before{
+	content: "";
+}
+
+div.hotel-detail-info ul li:after{
+	/*content: "";
+	height:  0;
+	width:  0;
+	position:  absolute;
+	bottom: -11px;
+	left: 46%;
+	border: 8px solid transparent;
+	border-bottom-color:  #ddd;*/
+}
+
+div.hotel-detail-info ul li a{
+	position: relative;
+	height: 70px;
+	width: 70px;
+	background: white;
+	margin:  0 auto;
+	display:  inline-block;
+	border: 2px solid #e0e0e0;
+	border-radius: 50%; 
+	z-index: 3;
+	text-align: center;
+	cursor: pointer;
+	padding: 19px;
+}
+
+div.hotel-detail-info ul li a span{
+	font-size: 20px;
+}
+
+div.hotel-detail-info ul li a:hover{
+	position: relative;
+	height: 70px;
+	width: 70px;
+	background: white;
+	margin:  0 auto;
+	display:  inline-block;
+	border: 2px solid #fec107 !important;
+	border-radius: 50%; 
+	z-index: 3;
+	text-align: center;
+	cursor: pointer;
+	padding: 15px;
+}
+
+.active-detail{
+	border: 2px solid #fec107 !important;
+}
+.active-detail:after{
+	content: "";
+	height:  0;
+	width:  0;
+	position:  absolute;
+	bottom: -13px;
+	left: 38%;
+	border: 8px solid transparent;
+	border-bottom-color:  #ecc60a;
+}
+i.icon-details{
+	font-weight: 400;
+	font-size: 20px;
+}
+
+.btn-details{
+	/* height: 100%; */
+	position: relative;
+	height: 96px;
+	background-color: white;
+	padding: 10px;
+}
+
+.btn-details .line-box{
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	background: #e0e0e0;
+	height: 3px;
+	width: 80%;
+	z-index: 1;
+	margin: 0 auto;
+}
+
+.content-details{
+	/* position:  absolute; */
+	background-color: white;
+	margin: 0;
+	/* top: 0; */
+	padding: 0;
+	/* left:  0; */
+	width:  100%;
+}
+
+.content-details .line-body{
+	background: #e0e0e0;
+	height: 1px;
+	width: 100%;
+}
+
+div#Home{
+
+}
+
+.content-details .cha-hotel{
+	/* position: relative; */
+	background-color: white;
+	width:  100%;
+	display: inline-block;
+} 
+
+.content-details .cha-hotel .info-hotel{
+	/* position: absolute; */
+	background-color:  white;
+	top: 0;
+	left: 0;
+	transition: 0.5s;
+	width: 100%;
+	display: none;
+	background-color: white;
+}
+
+.content-details .cha-hotel .image-list-hotel{
+	/* position: absolute; */
+	top: 0;
+	left: 0;
+	transition: 0.5s;
+	display: none;
+	background-color: white;
+}
+
+.content-details .cha-hotel .comment-hotel{
+	/* position: absolute; */
+	top: 0;
+	left: 0;
+	transition: 0.5s;
+	display: none;
+	width: 100%;
+	background-color: white;
+}
+
+.content-details .cha-hotel .map-hotel{
+	/* position: absolute; */
+	top: 0;
+	left: 0;
+	transition: 0.5s;
+	display: none;
+	width: 100%;
+	background-color: white;
+}
+
+.active-content{display: block !important;}
+
+span.tiennghi{font-size: 14px;margin-left: 5px;}
+
+/*================== list image ============*/
+
+.list-images{padding: 5px 10px;}
+
+div.cha-item-image{	padding: 0px 20px;}
+
+div.item-image{padding: 0; overflow: hidden;}
+
+.anhnoibat .list-images .cha-item-image .item-image a{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.anhnoibat .list-images .cha-item-image .item-image a img{
+	overflow: hidden;
+	transition: 0.5s;
+}
+
+.anhnoibat .list-images .cha-item-image .item-image a img:hover{
+	transform: scale(1.5);
+	opacity: 0.8
+}
+/*================== end list image ============*/
+
+div.right-content{
+	width: 100%;
+	display: inline-block;
+	background-color: white;
+	margin-top: 16px;
+}
+
+.title-right-content{
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.item-cafe ul{
+	list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item-cafe ul li{
+	float: left;
+    width: 100%;
+    padding: 0px 10px;
+    padding-top: 7px;
+    border-bottom: 1px solid #ddd;
+}
+
+.item-cafe ul li:hover{
+	background-color: #ddd;
+}
+
+.item-cafe ul li a{
+	text-align: center;
+    text-decoration: none;
+    color: black;
+    display: inline-flex;
+    width: 100%;
+}
+
+.item-cafe ul li a img{
+	height: 100%;
+	width: 60px;
+}
+
+.item-cafe ul li a .text-item-cafe {
+	width: 100%;
+}
+
+.item-cafe ul li a .text-item-cafe h6{
+	padding-left: 5px;
+	padding-right: 5px;
+	max-width: 265px;
+	max-height: 19px;
+	overflow: hidden;
+}
+
+.item-cafe ul li a .text-item-cafe p{
+	font-size: 14px;
+	padding-left: 5px;
+	max-width: 265px;
+	max-height: 20px;
+	line-height: 17px;
+	overflow: hidden;
+}

@@ -1,0 +1,98 @@
+body{
+	background-color: #f8f8f8;
+}
+
+.layer-top{
+	background-color: #242121 !important;
+}
+.header{
+	width: auto;
+	height: auto;
+}
+.content-info{
+	margin-bottom: 30px;
+	margin-top: 100px;
+}
+
+.content{
+}
+
+.content .left-user{
+	border: 1px solid #ddd;
+	padding: 5px;
+	background-color: white;
+	box-shadow: 1px 2px 5px 1px lightsteelblue;
+}
+
+.content .left-user .avatar{
+
+}
+
+.content .left-user .avatar img{
+	text-align: center;
+    margin-left: 25%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+}
+
+.content .left-user .options{
+
+padding:  0;
+}
+
+.content .left-user .options ul{
+	padding: 0;
+	margin: 0;
+}
+
+.content .left-user .options ul li{
+	list-style: none;
+	padding: 5px 10px;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+.content .left-user .options ul li a{
+	text-decoration: none;
+	color: #383838 !important;
+	display: inline-block;
+	width: 100%;
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.content .left-user .options ul li:hover{
+	background-color: #ddd;
+}
+
+.active{
+	background-color: #ddd;
+}
+
+.content .right-user{
+	padding: 5px;
+	border: 1px solid #ddd;
+	background-color: white;
+	box-shadow: 1px 2px 5px 1px lightsteelblue;
+}
+
+.form-info{
+	padding: 5px 20px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.form-info input{
+	border-radius: 0px;
+}
+
+.form-info select{
+	border-radius: 0px;
+}
+
+
+
