@@ -20,6 +20,6 @@
 
 	Route::get('lvtn-add-tourist-places', 'CMS_ModuleController@_GETVIEW_ADD_TOURIST_PLACES')->name('ADD_TOURIST_PLACES');
 	Route::post('lvtn-add-tourist-places', 'CMS_AddDataController@_POST_TOURIST_PLACES');
-	Route::get('lvtn-add-services/{id}', 'CMS_ModuleController@_GETVIEW_ADD_SERVICES')->name('_GETVIEW_ADD_SERVICES');
-	Route::post('lvtn-add-services/{id}', 'CMS_AddDataController@_GETVIEW_ADD_SERVICES');
+	Route::get('lvtn-add-services', 'CMS_ModuleController@_GETVIEW_ADD_SERVICES')->name('_GETVIEW_ADD_SERVICES');
+	Route::post('lvtn-add-services', 'CMS_AddDataController@_GETVIEW_ADD_SERVICES');
 

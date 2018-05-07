@@ -44,6 +44,9 @@
                 <ul>
                     <li><a href="#" title="Người dùng thành viên - partner"><span>Partner</span></a></li>
                     <li><a href="#" title="Người dùng thành viên - tour guide"><span>Tour guide</span></a></li>
+                     <li><a href="#" title="Người dùng thành viên - partner"><span>Doanh nghiệp</span></a></li>
+                    <li><a href="#" title="Người dùng thành viên - tour guide"><span>Moderator</span></a></li>
+
                 </ul>
             </div><!-- .sidebar-submenu -->
 
@@ -71,13 +74,9 @@
                 <span>Maps</span>
             </a>
         </li>
+        
         <li class="header"><span>Danh mục dịch vụ</span></li>
-        <li>
-            <a href="{{ route('_GETVIEW_ADD_SERVICES') }}" title="Pages">
-                <i class="glyph-icon icon-coffee"></i>
-                <span>Thêm dịch vụ</span>
-            </a>
-        </li>
+
         <li>
             <a href="#" title="Pages">
                 <i class="glyph-icon icon-coffee"></i>
@@ -108,5 +107,33 @@
                 <span>Phương tiện di chuyển</span>
             </a>
         </li>
+        <li class="header"><span>Danh mục khác</span></li>
+
+        <li>
+            <a href="#" title="Pages">
+                <i class="glyph-icon icon-"></i>
+                <span>Danh mục điểm</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="Pages">
+                <i class="glyph-icon icon-"></i>
+                <span>Danh mục loại hình sự kiện</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="Pages">
+                <i class="glyph-icon icon-"></i>
+                <span>Danh mục sự kiện</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="Pages">
+                <i class="glyph-icon icon"></i>
+                <span>Danh mục mạng xã hội</span>
+            </a>
+        </li>
+        
+        
     </ul><!-- #sidebar-menu -->
 </div>

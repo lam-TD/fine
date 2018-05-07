@@ -269,7 +269,10 @@
 									<li class="nav-item" style="position: relative; margin-right: 2px;">
 											<!-- hien thi khi dang nhap thanh cong -->
 											<a class="nav-link btn-login" style="padding: 0; border: none !important;" id="id-user-form">
-												<img src="public/resource/images/avatar1.jpg" alt="" style="height: 33px; width: 33px;">
+												<img src="public/resource/images/@if(Session::get('user_info')->avatar == null)
+													avatar2.jpg
+													@else {{Session::get('user_info')->avatar}}
+												@endif" alt="" style="height: 33px; width: 33px;">
 												{{Session::get('user_info')->username}} <i class="fas fa-caret-down"></i>
 											</a>
 											<div class="user-form">
@@ -394,38 +397,113 @@
 											</div> --}}
 											<div class="content-nofi">
 												<ul id="body-nofi" style="width: 200px;">
-													<li style="height: 27px;">
-														<a href="{{route('addplace')}}" class="a-content-nofi">
-															<p class="text-nofi" style="height: auto;width: auto;">
-																<i class="fas fa-map-marker"></i> 
-																Thêm địa điểm
-															</p>	
-														</a>
-													</li>
-													<li style="height: 27px;">
-														<a href="" class="a-content-nofi">
-															<p class="text-nofi" style="height: auto;width: auto;">
-																<i class="fas fa-archive"></i> 
-																Thêm Dịch vụ
-															</p>	
-														</a>
-													</li>
-													<li style="height: 27px;">
-														<a href="" class="a-content-nofi">
-															<p class="text-nofi" style="height: auto;width: auto;">
-																<i class="fas fa-archive"></i> 
-																Lịch trình
-															</p>	
-														</a>
-													</li>
-													<li style="height: 27px;">
-														<a href="" class="a-content-nofi">
-															<p class="text-nofi" style="height: auto;width: auto;">
-																<i class="fas fa-bomb"></i> 
-																Góp ý
-															</p>	
-														</a>
-													</li>
+													@if(Session::has('login') && Session::get('login') == true)
+														@if(Session::get('user_info')->level == 1)
+														<li style="height: 27px;">
+															<a href="{{route('addplace')}}" class="a-content-nofi">
+																<p class="text-nofi" style="height: auto;width: auto;">
+																	<i class="fas fa-map-marker"></i> 
+																	Thêm địa điểm
+																</p>	
+															</a>
+														</li>
+														<li style="height: 27px;">
+															<a href="" class="a-content-nofi">
+																<p class="text-nofi" style="height: auto;width: auto;">
+																	<i class="fas fa-archive"></i> 
+																	Thêm Dịch vụ
+																</p>	
+															</a>
+														</li>
+														<li style="height: 27px;">
+															<a href="" class="a-content-nofi">
+																<p class="text-nofi" style="height: auto;width: auto;">
+																	<i class="fas fa-archive"></i> 
+																	Lịch trình
+																</p>	
+															</a>
+														</li>
+														
+														@elseif(Session::get('user_info')->level == 2)
+															<li style="height: 27px;">
+																<a href="{{route('addplace')}}" class="a-content-nofi">
+																	<p class="text-nofi" style="height: auto;width: auto;">
+																		<i class="fas fa-map-marker"></i> 
+																		Thêm địa điểm
+																	</p>	
+																</a>
+															</li>
+															<li style="height: 27px;">
+																<a href="" class="a-content-nofi">
+																	<p class="text-nofi" style="height: auto;width: auto;">
+																		<i class="fas fa-archive"></i> 
+																		Thêm Dịch vụ
+																	</p>	
+																</a>
+															</li>
+															<li style="height: 27px;">
+																<a href="" class="a-content-nofi">
+																	<p class="text-nofi" style="height: auto;width: auto;">
+																		<i class="fas fa-archive"></i> 
+																		Lịch trình
+																	</p>	
+																</a>
+															</li>
+
+														@elseif(Session::get('user_info')->level == 3)
+															<li style="height: 27px;">
+																<a href="{{route('addplace')}}" class="a-content-nofi">
+																	<p class="text-nofi" style="height: auto;width: auto;">
+																		<i class="fas fa-map-marker"></i> 
+																		Thêm địa điểm
+																	</p>	
+																</a>
+															</li>
+															<li style="height: 27px;">
+																<a href="" class="a-content-nofi">
+																	<p class="text-nofi" style="height: auto;width: auto;">
+																		<i class="fas fa-archive"></i> 
+																		Thêm Dịch vụ
+																	</p>	
+																</a>
+															</li>
+										
+
+														@elseif(Session::get('user_info')->level == 4)
+															<li style="height: 27px;">
+																<a href="{{route('addplace')}}" class="a-content-nofi">
+																	<p class="text-nofi" style="height: auto;width: auto;">
+																		<i class="fas fa-map-marker"></i> 
+																		Thêm địa điểm
+																	</p>	
+																</a>
+															</li>
+															<li style="height: 27px;">
+																<a href="" class="a-content-nofi">
+																	<p class="text-nofi" style="height: auto;width: auto;">
+																		<i class="fas fa-archive"></i> 
+																		Thêm Dịch vụ
+																	</p>	
+																</a>
+															</li>
+															<li style="height: 27px;">
+																<a href="{{route('addplace')}}" class="a-content-nofi">
+																	<p class="text-nofi" style="height: auto;width: auto;">
+																		<i class="fas fa-map-marker"></i> 
+																		Giao việc
+																	</p>	
+																</a>
+															</li>
+														@elseif(Session::get('user_info')->level == 5)	
+															<a href="{{route('addplace')}}" class="a-content-nofi">
+																<p class="text-nofi" style="height: auto;width: auto;">
+																	<i class="fas fa-map-marker"></i> 
+																	Lịch trình
+																</p>	
+															</a>
+														@endif
+													@endif
+
 													<li style="height: 27px;">
 														<a href="" class="a-content-nofi">
 															<p class="text-nofi" style="height: auto;width: auto;">
@@ -434,7 +512,6 @@
 															</p>	
 														</a>
 													</li>
-													
 												</ul>
 											</div>
 										</div>

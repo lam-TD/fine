@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <a href="#" title="Example tile shortcut" class="tile-box tile-box-alt btn-success">
+        <a href="{{ route("ALL_LIST_PLACE") }}" title="Example tile shortcut" class="tile-box tile-box-alt btn-success">
             <div class="tile-header">
                 Địa điểm chờ duyệt
             </div>
@@ -21,7 +21,7 @@
         </a>
     </div>
     <div class="col-md-4">
-        <a href="#" title="Example tile shortcut" class="tile-box tile-box-alt btn-info">
+        <a href="{{ route("ALL_LIST_SERVICES") }}" title="Example tile shortcut" class="tile-box tile-box-alt btn-info">
             <div class="tile-header">
                 Dịch vụ chờ duyệt
             </div>
@@ -31,7 +31,7 @@
         </a>
     </div>
     <div class="col-md-4">
-        <a href="#" title="Example tile shortcut" class="tile-box tile-box-alt btn-warning">
+        <a href="{{ route('ALL_LIST_USER') }}" title="Example tile shortcut" class="tile-box tile-box-alt btn-warning">
             <div class="tile-header">
                 Người dùng chờ duyệt
             </div>

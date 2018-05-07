@@ -52,8 +52,7 @@
             <table id="datatable-reorder" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <?php $tmp_show = 1?>
-                    <th>STT</th>
+                    
                     <th>ID</th>
                     <th>Tên địa điểm</th>
                     <th>Địa chỉ</th>
@@ -68,7 +67,6 @@
 
                 <tfoot>
                 <tr>
-                    <th>STT</th>
                     <th>ID</th>
                     <th>Tên địa điểm</th>
                     <th>Địa chỉ</th>
@@ -84,7 +82,6 @@
 
                     @foreach($data as $item)
                     <tr>
-                        <td><?php echo $tmp_show; $tmp_show++; ?></td>
                         <td>{{ $item->id }}</td>
                         <td><a href="">{{ $item->pl_name }}</a></td>
                         <td>{{ $item->pl_address }}</td>

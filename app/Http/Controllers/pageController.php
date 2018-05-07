@@ -90,11 +90,6 @@ class pageController extends Controller
 
 
     //=============================== NEW ===========================================
-        // public function count_city_service_all()
-        // {
-        //     $result = DB::select("CALL c_count_service_city_all()");
-        //     return ($result);
-        // }
 
 
 
@@ -124,49 +119,36 @@ class pageController extends Controller
     {
         $username = $request->input('username');
         $password = $request->input('password');
-        if( Auth::attempt(['username' => $username, 'password' => $password])) {
-            $user = Auth::user();
-                
-            $result = DB::select('CALL login_info_phone(?)',array(Auth::user()->user_id));
-                // dd($result);
-                $level = "personal";
-                foreach ($result as $result) {
-                    if ($result->admin != null) {
-                        $level = "admin";
-                    }
-                    else if($result->moderator != null){
-                        $level = "moderator";
-                    }
-                    else if($result->partner != null){
-                        $level = "partner";
-                    }
-                    else if($result->enterprise != null){
-                        $level = "enterprise";
-                    }
-                    else if($result->tour_guide != null){
-                        $level = "tour_guide";
-                    }
-    
-                    $result_info = array(
-                        'id' => $result->user_id,
-                        'username' =>$result->username,
-                        'avatar' =>$result->contact_avatar,
-                        'level' =>$level
-                    );
-                }
 
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'http://chinhlytailieu/vntour_api/',
+            // You can set any number of default request options.
+            'timeout'  => 20.0,
+        ]);
+        $response = $client->request('GET',"loginpost/user={$username}&pass={$password}");
+        $lam = json_decode($response->getBody()->getContents());
+        
+        if ($lam != null) {
             Session()->put('login',true);  
-            Session()->put('user_info',$result);
+            Session()->put('user_info',$lam);
             return redirect('/');
-                
-        } 
-        else {
+        }
+        else{
             return redirect()->back()->with(['erro'=>'Tên tài khoản hoặc mật khẩu không đúng','userold'=>$username]);
         }
+            
     }
 
     public function LogoutSession()
     {
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'http://chinhlytailieu/vntour_api/',
+            // You can set any number of default request options.
+            'timeout'  => 20.0,
+        ]);
+        $response = $client->request('GET',"logoutW");
         Session()->flush();
         return redirect()->back();
     }
@@ -178,7 +160,7 @@ class pageController extends Controller
             // Base URI is used with relative requests
             'base_uri' => 'http://chinhlytailieu/vntour_api/',
             // You can set any number of default request options.
-            'timeout'  => 5.0,
+            'timeout'  => 20.0,
         ]);
         $response = $client->request('GET',"getServicesTake/type={$type}&id={$take}");
 
@@ -191,7 +173,7 @@ class pageController extends Controller
             // Base URI is used with relative requests
             'base_uri' => 'http://chinhlytailieu/vntour_api/',
             // You can set any number of default request options.
-            'timeout'  => 5.0,
+            'timeout'  => 20.0,
         ]);
         $response = $client->request('GET',"checklogin");
 
@@ -204,7 +186,7 @@ class pageController extends Controller
             // Base URI is used with relative requests
             'base_uri' => 'http://chinhlytailieu/vntour_api/',
             // You can set any number of default request options.
-            'timeout'  => 5.0,
+            'timeout'  => 20.0,
         ]);
         $response = $client->request('GET',"count_city_service_all_image");
 

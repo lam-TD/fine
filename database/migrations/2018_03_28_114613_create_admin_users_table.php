@@ -16,7 +16,6 @@ class CreateAdminUsersTable extends Migration
         Schema::create('vnt_admin_user', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
             $table->primary('user_id');
-
             $table->foreign('user_id')->references('user_id')->on('vnt_user');
             $table->timestamps();
         });

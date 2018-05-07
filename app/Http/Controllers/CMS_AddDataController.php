@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\CheckTaskRequest;
 use App\Http\Requests\CheckAddTouristPlacesRequest;
 use App\Http\Requests\CheckAddServicesRequest;
@@ -73,16 +74,19 @@ class CMS_AddDataController extends Controller
         } 
         else if ($request->get('action') == 'save_and_add_service') {
             $place->save();
-            $get_last_place = DB::table('vnt_tourist_places')
-            ->select('id', 'pl_name')
-            ->orderBy('created_at', 'desc')->first();
             if (view()->exists('view.CMS.components.com_services.add_services'))
             {
-                return view('CMS.components.error');
+                // return view('CMS.components.error');
             }
             else    {
                 
-                return view('CMS.components.com_services.add_services', ['data_place'=>$get_last_place]);
+
+                // return Redirect::route('_GETVIEW_ADD_SERVICES')->with('data_place', $get_last_place);
+
+                // Redirect::route('_GETVIEW_ADD_SERVICES', array('data_place' => $get_last_place));
+                
+                return redirect()->route('_GETVIEW_ADD_SERVICES');
+                // return view('CMS.components.com_services.add_services', ['data_place'=>$get_last_place]);
             }
         }
         else

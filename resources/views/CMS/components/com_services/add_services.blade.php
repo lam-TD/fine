@@ -38,7 +38,7 @@
                 <div class="col-md-12 form-group" style="padding-top: 20px" >
                     <div class="col-md-4">
                         <label for="type_services" >Chọn loại hình: </label>
-                        <select class="form-control" name="type_services">
+                        <select id="open_star" class="form-control" name="type_services">
                             <option value="1">Ăn uống - Ẩm thực</option>
                             <option value="2">Khách sạn - Nơi ở</option>
                             <option value="3">Di chuyển - Phương tiện</option>
@@ -100,9 +100,9 @@
                             <label for="website">Website: </label>
                             <input type="text" value="{{ old('website') }}" id="website" required  class="form-control" name="website" >
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-4" id="star" hidden>
                             <label for="star">Số sao: </label>
-                            <input type="text" value="{{ old('website') }}" id="star" required  class="form-control" name="star" >
+                            <input type="number" max='5' min='1'  value="{{ old('star') }}" id="star" required  class="form-control" name="star" >
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,19 @@
         
     </div>
 </div>
+<script>
+    
+    $("#open_star").change(function () {
+      var selected_option = $('#open_star').val();
 
+      if (selected_option === '2') {
+        $('#star').attr('pk','1').show();
+      }
+      if (selected_option != '2') {
+        $("#star").removeAttr('pk').hide();
+      }
+    })
+</script>
 
 
 @endsection

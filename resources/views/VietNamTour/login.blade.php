@@ -16,24 +16,22 @@
 						<h3 class="text-center">Login</h3>
 					</div>
 					<div class="body">
-						<form action="{{route('loginpost')}}" method="post">
+						<form action="loginpost" method="post">
 							<div class="login">
 								<input type="hidden" name="csrf-token" content="{{ csrf_token() }}">
 							</div>
-
-								@if (count($errors) > 0)
-					              @foreach ($errors->all() as $error)
-					                  <small class="float-left" style="color: red;">{{ $error }}</small>
-					              @endforeach
-							    @elseif(Session::has('erro'))
+							    @if(Session::has('erro'))
 									<small style="color: red;">Tên tài khoản hoặc mật khẩu không đúng</small>
 							    @endif
 
-								<input type="text" placeholder="Username..." name="username" required="required" 
-									value="">
-								<input type="password" placeholder="Password..." name="password" required="required">
+								<input id="txtuser" type="text" placeholder="Username" name="username" required="required" 
+									value="@if(Session::has('userold')){{Session::get('userold')}}@endif">
+								<input id="txtpass" type="password" placeholder="Password" name="password" required="required">
+								<small id="thongbao" style="color: red; display: none;">Tên tài khoản hoặc mật khẩu không đúng</small>
+
 								<a href="" style="font-size: 14px;width: 100%;display: inline-block;"><i>Quên mật khẩu</i></a>
-								<button class="btn btn-success float-right btnlogin" type="submit">Login</button>
+
+								<button class="btn btn-success float-right btnlogin" type="" id="btnlogin">Login</button>
 							</div>
 							<div class="login-social">
 								<h5 class="text-center">Login social</h5>
@@ -61,5 +59,6 @@
 	<script type="text/javascript" src="public/resource/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="public/resource/js/bootstrap.js"></script>
 	<script src="public/resource/js/fontawesome-all.min.js" type="text/javascript"></script>
+	<script src="public/resource/js/p/login.js" type="text/javascript"></script>
 </body>
 </html>

@@ -503,13 +503,16 @@ class CMS_ModuleController extends Controller
 	}
 	public function _GETVIEW_ADD_SERVICES()
 	{
+	 	$get_last_place  = DB::table('vnt_tourist_places')
+        ->select('id', 'pl_name')
+        ->orderBy('created_at', 'desc')->first();
 		if (view()->exists('view.CMS.components.com_services.add_services'))
 		{
 			return view('CMS.components.error');
 		}
     	else	{
 			
-			return view('CMS.components.com_services.add_services');
+			return view('CMS.components.com_services.add_services', ['data_place'=>$get_last_place]);
 		}
 	}
 

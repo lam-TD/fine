@@ -108,6 +108,7 @@
                 <div class="clearfix"></div>
                 <div class="col-md-12" style="padding-bottom: 15px">
                     <label for="map">Bản đồ</label>
+                     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                     <div id="map" style="height:400px;"></div>
                 </div>
                 <div class="btn-toolbar" role="toolbar">
@@ -191,30 +192,30 @@ function Load_toado() {
 </script>
 
 <script>
+
     function myMap(argument) {
          var map;
          var lat;
          var long;
-
         function init_map() {
             var opts = { 'center': new google.maps.LatLng(10.5404526,106.0088311), 'zoom': 8, 'mapTypeId': google.maps.MapTypeId.ROADMAP }
                 map = new google.maps.Map(document.getElementById('map'), opts);
-
-            
             google.maps.event.addListener(map, 'click', function (e) {
                 // alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
                 document.getElementById("kinhdo").value = e.latLng.lng() ;
                 document.getElementById("vido").value = e.latLng.lat() ;
                 var sum = 'Vĩ độ: ' + e.latLng.lat() + ', Kinh độ: '+  e.latLng.lng() ;
                 document.getElementById("lat_and_long").value = sum;
-
             });
-            
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
         } 
         google.maps.event.addDomListener(window, 'load', init_map);
-    }
 
+    }
+     
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQnUfJIUr14br8WuniuuUMGkq0zDFoAc4&callback=myMap"></script>
+
 @endsection 
