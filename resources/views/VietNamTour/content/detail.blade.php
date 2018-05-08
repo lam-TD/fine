@@ -186,9 +186,137 @@
 										                <div class="ibox-content">
 										                    <h5 style="font-weight: 700;">ĐÁNH GIÁ DỊCH VỤ</h5>
 										                </div>
-										                <div class="ibox-content">
-										                	Bạn chưa đánh giá về địa điểm này
-										                </div>
+										                @if($checklogin == null)
+										                	<div class="ibox-content">
+										                		Bạn cần đăng nhập để đánh giá dịch vụ này
+										                	</div>
+										                @else
+										                	@if($checkUserRating == null)
+										                		<div class="ibox-content">
+												                	Bạn chưa đánh giá về địa điểm này - <button class="btn  btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter">Đánh giá ngay</button>
+												                </div>
+																<!-- Modal -->
+																<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+																  <div class="modal-dialog modal-dialog-centered" role="document">
+																    <div class="modal-content">
+																      <div class="modal-header">
+																        <h5 class="modal-title" id="exampleModalLongTitle">Đánh giá</h5>
+																        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																          <span aria-hidden="true">&times;</span>
+																        </button>
+																      </div>
+																      <div class="modal-body" style="height: 150px;">
+																        <div class="form-group row" style="margin-bottom: 0px;">
+																		    <label for="staticEmail" class="col-sm-2 col-form-label">Điểm</label>
+																		    <div class="col-sm-10">
+																		      <div class="input-group mb-3">
+																				  <input type="number" class="form-control" placeholder="0" min="1" max="5" aria-label="Recipient's username" aria-describedby="basic-addon2" id="txtrating">
+
+																				  <div class="input-group-append">
+																				    <span class="input-group-text" id="basic-addon2" style="background-color: transparent;"><i style="color: yellow;" class="fas fa-star"></i></span>
+																				  </div>
+																				</div>
+																				<span id="errorating" style="color: red; display: none;">Bạn chưa đánh giá kìa</span>
+																				  <span id="erroratingPoint" style="color: red; display: none;">Điểm không được vượt quá 5</span>
+																		    </div>
+																		  </div>
+
+																		  <div class="form-group row">
+																		    <label for="staticEmail" class="col-sm-2 col-form-label">Đánh giá</label>
+																		    <div class="col-sm-10">
+																		      <div class="input-group mb-3">
+																				  <textarea class="form-control" style="width: 100%;" id="txtdetail"></textarea>
+																				</div>
+																				<span class="col-md-12" id="errordetail" style="color: red; display: none;">Vui lòng nhập nội dung đánh giá</span>
+																		    </div>
+																		    
+																		    
+																		  </div>
+																      </div>
+																      <div class="modal-footer">
+																        <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Thoát</button>
+
+																        <button id="btnsave" type="button" class="btn btn-primary btn-sm">Đánh giá</button>
+																      </div>
+																    </div>
+																  </div>
+																</div>
+											               	@else
+											               		@foreach($checkUserRating as $ra)
+											               		<div class="chat-discussion" style="background-color: white; height: 100px; overflow: hidden;">
+												               		<div class="chat-message left">
+									                                    @if($ra->contact_avatar == null)
+									                                    	<img class="message-avatar" src="public/resource/images/avatar2.jpg" alt="">
+									                                    @else
+									                                    	{{-- <img class="message-avatar" src="public/resource/images/{{$r->contact_avatar}}" alt="lam"> --}}
+									                                    	<img class="message-avatar" src="public/resource/images/{{$ra->contact_avatar}}" alt="">
+									                                    @endif
+									                                    <div class="message">
+									                                        <a class="message-author" style="color: #007bff"> {{$ra->username}} - 
+									                                        	@for($i = 0; $i < $ra->vr_rating; $i++)
+										                                        		<i style="color: yellow;" class="fas fa-star"></i>
+										                                        @endfor  - <span style="color: red;">Đánh giá của bạn</span>
+										                                        - <button class="btn  btn-sm btn-outline-primary" data-toggle="modal" data-target="#suadanhgia">Cập nhật đánh giá</button>
+										                                    </a>
+									                                        <span class="message-date"> {{$ra->created_at}} </span>
+									                                        <span class="message-content">
+									    										{{$ra->vr_ratings_details}}
+								                                            </span>
+									                                    </div>
+									                                </div>
+									                            </div>
+
+									                            <div class="modal fade" id="suadanhgia" tabindex="-1" role="dialog" aria-labelledby="suadanhgia" aria-hidden="true">
+																  <div class="modal-dialog modal-dialog-centered" role="document">
+																    <div class="modal-content">
+																      <div class="modal-header">
+																        <h5 class="modal-title" id="exampleModalLongTitle">Đánh giá</h5>
+																        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																          <span aria-hidden="true">&times;</span>
+																        </button>
+																      </div>
+																      <div class="modal-body" style="height: 150px;">
+																        <div class="form-group row" style="margin-bottom: 0px;">
+																		    <label for="staticEmail" class="col-sm-2 col-form-label">Điểm</label>
+																		    <div class="col-sm-10">
+																		      <div class="input-group mb-3">
+																				  <input type="number" class="form-control" placeholder="0" min="1" max="5" aria-label="Recipient's username" aria-describedby="basic-addon2" id="txtrating2" value="{{$ra->vr_rating}}">
+
+																				  <div class="input-group-append">
+																				    <span class="input-group-text" id="basic-addon2" style="background-color: transparent;"><i style="color: yellow;" class="fas fa-star"></i></span>
+																				  </div>
+																				</div>
+																				<span id="errorating" style="color: red; display: none;">Bạn chưa đánh giá kìa</span>
+																				  <span id="erroratingPoint" style="color: red; display: none;">Điểm không được vượt quá 5</span>
+																		    </div>
+																		  </div>
+
+																		  <div class="form-group row">
+																		    <label for="staticEmail" class="col-sm-2 col-form-label">Đánh giá</label>
+																		    <div class="col-sm-10">
+																		      <div class="input-group mb-3">
+																				  <textarea class="form-control" style="width: 100%;" id="txtdetail2">{{$ra->vr_ratings_details}}</textarea>
+																				</div>
+																				<span class="col-md-12" id="errordetail" style="color: red; display: none;">Vui lòng nhập nội dung đánh giá</span>
+																		    </div>
+																		    
+																		    
+																		  </div>
+																      </div>
+																      <div class="modal-footer">
+																        <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Thoát</button>
+
+																        <button id="btnsave2" type="button" class="btn btn-primary btn-sm">Đánh giá</button>
+																      </div>
+																    </div>
+																  </div>
+																</div>
+																@endforeach
+																
+										                	@endif
+										                	
+										                @endif
+										                
 										            </div>
 										        </div>
 										    </div>
@@ -199,26 +327,32 @@
 										                    <div class="row">
 										                        <div class="col-md-12">
 										                            <div class="chat-discussion" style="background-color: white;">
+										                            @if($rating != null)
+										                            	@foreach($rating as $r)
 										                                <div class="chat-message left">
-										                                    <img class="message-avatar" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+										                                    @if($r->contact_avatar == null)
+										                                    	<img class="message-avatar" src="public/resource/images/avatar2.jpg" alt="">
+										                                    @else
+										                                    	{{-- <img class="message-avatar" src="public/resource/images/{{$r->contact_avatar}}" alt="lam"> --}}
+										                                    	<img class="message-avatar" src="public/resource/images/{{$r->contact_avatar}}" alt="">
+										                                    @endif
 										                                    <div class="message">
-										                                        <a class="message-author" href="#"> Michael Smith </a>
-										                                        <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
+										                                        <a class="message-author" style="color: #007bff"> {{$r->username}} - 
+										                                        	@for($i = 0; $i < $r->vr_rating; $i++)
+										                                        		<i style="color: yellow;" class="fas fa-star"></i>
+										                                        	@endfor 
+										                                        	 
+										                                        </a>
+										                                        <span class="message-date"> {{$r->created_at}} </span>
 										                                        <span class="message-content">
-										    										Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+										    										{{$r->vr_ratings_details}}
 									                                            </span>
 										                                    </div>
 										                                </div>
-										                                <div class="chat-message left">
-										                                    <img class="message-avatar" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-										                                    <div class="message">
-										                                        <a class="message-author" href="#"> Michael Smith </a>
-										                                        <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
-										                                        <span class="message-content">
-										    										Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-									                                            </span>
-										                                    </div>
-										                                </div>
+										                                @endforeach
+										                            @else
+										                            	<h5>Chưa có đánh giá về dịch vụ này</h5>
+										                            @endif
 										                            </div>
 										                        </div>
 										                    </div>

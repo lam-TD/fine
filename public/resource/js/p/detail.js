@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	checkLogin();
+	check_rating();
 })
 
 
@@ -9,14 +10,14 @@ function checkLogin() {
 	var service_id = path.slice(path.lastIndexOf("/") + 4,path.search("&")); // lay id service tu url
 	var dem = 0;
 	$.ajax({
-			url: 'checkLogin',
+			url: 'check-login',
 			type: 'GET',
 			dataType: 'json'
 		})
 		.done(function (response) {
-			if (response.length > 0) 
+			if (response > 0) 
 			{
-				var pathCheckLike = '/http://chinhlytailieu/vntour_api/checkLike/userid=' + response[0].user_id + '&svid=' + service_id;
+				var pathCheckLike = 'http://chinhlytailieu/vntour_api/checkLike/userid=' + response + '&svid=' + service_id;
 				
 				$.ajax({
 						url: pathCheckLike,
@@ -44,11 +45,13 @@ function checkLogin() {
 									document.getElementById('num_like').innerHTML = l;
 									dem++;
 								}
+								ThemVaCapNhat();
 							});
+							
 						}
 						else{
 							$('#like01').click(function () {
-							// console.log($('#num_like').innerHTML);
+								console.log("Them vao");
 							if (dem % 2 == 0) 
 							{
 								var lam = document.getElementById('num_like').innerHTML;
@@ -62,6 +65,7 @@ function checkLogin() {
 								document.getElementById('num_like').innerHTML = l;
 								dem++;
 							}
+							ThemVaCapNhat();
 					});
 						}
 					}).fail(function (response) {
@@ -85,26 +89,89 @@ function checkLogin() {
 		})
 }
 
-// function checkLike(user_id,service_id) {
-// 	// kiem tra xem nguoi dung co like dich vu hay chua
-// 	var pathCheckLike = 'checkLike/userid=' + user_id + '&svid=' + service_id;
-// 	console.log(path);
-// 	$.ajax({
-// 			url: pathCheckLike,
-// 			type: 'GET',
-// 			dataType: 'json'
-// 		})
-// 		.done(function (response) {
-// 			console.log(response);
-// 			var l = parseInt(response);
-// 			if (l == 1) 
-// 			{
-// 				return 1;
-// 			}
-// 			else{
-// 				return -1;
-// 			}
-// 		}).fail(function (response) {
-// 				return -1;
-// 		})
-// }
+function kiemtradangnhap() {
+	// body...
+}
+
+function check_rating() {
+
+	$('#btnsave').click(function () {
+		
+		var rating = $('#txtrating').val();
+        var detail = $('#txtdetail').val();
+        if (rating == null || rating == 0) {
+            $('#errorating').css('display','block');
+        }
+        else if(detail == ""){
+        	$('#errorating').css('display','none');
+            $('#errordetail').css('display','block');
+        }
+        else if(rating > 5){
+        	$('#errorating').css('display','none');
+            $('#errordetail').css('display','none');
+            $('#erroratingPoint').css('display','block');
+        }
+        else{
+        	var path = window.location.pathname;
+			var service_id = path.slice(path.lastIndexOf("/") + 4,path.search("&")); // lay id service tu url
+        	var path2 = 'save_rating/id='+ service_id +'&rating='+ rating +'&detail=' + detail;
+
+        	$.ajax({
+				url: path2,
+				type: 'GET'
+			})
+			.done(function (response) {
+				alert('Đánh giá thành công');
+				location.reload();
+			})
+			
+	    }
+	})
+
+	$('#btnsave2').click(function () {
+		
+		var rating = $('#txtrating2').val();
+        var detail = $('#txtdetail2').val();
+        if (rating == null || rating == 0) {
+            $('#errorating').css('display','block');
+        }
+        else if(detail == ""){
+        	$('#errorating').css('display','none');
+            $('#errordetail').css('display','block');
+        }
+        else if(rating > 5){
+        	$('#errorating').css('display','none');
+            $('#errordetail').css('display','none');
+            $('#erroratingPoint').css('display','block');
+        }
+        else{
+        	var path = window.location.pathname;
+			var service_id = path.slice(path.lastIndexOf("/") + 4,path.search("&")); // lay id service tu url
+        	var path2 = 'save_update_rating/id='+ service_id +'&rating='+ rating +'&detail=' + detail;
+
+        	$.ajax({
+				url: path2,
+				type: 'GET'
+			})
+			.done(function (response) {
+				alert('Cập nhật thành công đánh giá');
+				location.reload();
+			})
+			
+	    }
+	})
+}
+
+function ThemVaCapNhat() {
+	var path = window.location.pathname;
+	var service_id = path.slice(path.lastIndexOf("/") + 4,path.search("&")); // lay id service tu url
+	//ThemVaCapNhatLike/{idserivce}&user={id}
+	var path2 = 'ThemVaCapNhatLike/' + service_id;
+	$.ajax({
+		url: path2,
+		type: 'GET'
+	})
+	.done(function (response) {
+		
+	})
+}

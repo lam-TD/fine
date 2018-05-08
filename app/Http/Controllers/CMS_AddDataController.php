@@ -76,17 +76,42 @@ class CMS_AddDataController extends Controller
             $place->save();
             if (view()->exists('view.CMS.components.com_services.add_services'))
             {
-                // return view('CMS.components.error');
+                return view('CMS.components.error');
             }
-            else    {
-                
-
-                // return Redirect::route('_GETVIEW_ADD_SERVICES')->with('data_place', $get_last_place);
-
-                // Redirect::route('_GETVIEW_ADD_SERVICES', array('data_place' => $get_last_place));
-                
+            else    {                
                 return redirect()->route('_GETVIEW_ADD_SERVICES');
-                // return view('CMS.components.com_services.add_services', ['data_place'=>$get_last_place]);
+            }
+        }
+        else
+        {
+            return view('CMS.components.error');
+        }
+    }
+    public function _POST_ADD_SERVICES(CheckAddServicesRequest $request)
+    {
+        $services = new servicesModel();
+        $place->sv_description=$request->input('description');
+        $place->sv_content=$request->input('content');
+        $place->sv_open=$request->input('description');
+        $place->sv_close=$request->input('address');
+        $place->pl_phone_number=$request->input('phonenumber');
+        $place->pl_latitude=$request->input('vido');
+        $place->pl_longitude=$request->input('kinhdo');
+        $place->id_ward=$request->input('ward');
+        $place->pl_status=0; 
+        $place->user_partner_id =1;
+        if ($request->get('action') == 'save_close') {
+            $place->save();
+            return redirect('/lvtn-list-address')->with('message', "Hoàn tất, Đã thêm một địa điểm!");
+        } 
+        else if ($request->get('action') == 'save_and_add_service') {
+            $place->save();
+            if (view()->exists('view.CMS.components.com_services.add_services'))
+            {
+                return view('CMS.components.error');
+            }
+            else    {                
+                return redirect()->route('_GETVIEW_ADD_SERVICES');
             }
         }
         else

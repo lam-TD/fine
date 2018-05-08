@@ -26,9 +26,17 @@ Route::get('user','pageController@getuser');
 // load detail
 Route::get('detail/id={id}&type={type}','pageController@getdetail')->name("detail");
 Route::get('detail/s','pageController@getServiceTypeVicinity');
+Route::get('save_rating/id={id}&rating={r}&detail={t}','publicDetail@save_rating');
+Route::get('save_update_rating/id={id}&rating={r}&detail={t}','publicDetail@save_update_rating');
+
+
 
 // load addplace
 Route::get('addplace','pageController@getaddplace')->name('addplace');
+Route::get('loadPalce','pageController@loadPalce')->name('addplace');
+
+
+
 Route::post('addplace', 'pageController@postPlace');
 //  load addservice
 Route::get('addservice','pageController@getaddservice');
@@ -109,11 +117,14 @@ Route::get('searchService_City_Type/idcity={id}&type={t}&keyword={k}','pageContr
 
 Route::get('searchServices_AllCity_idType/type={t}&keyword={k}','pageController@searchServices_AllCity_idType');
 
+Route::get('search','pageController@getpageSearch')->name('search');
+
 
 
 
 //================= detail ==================
-Route::get('checkLogin','pageController@checkLogin');
+Route::get('checkLogin','publicDetail@checkLogin');
+Route::get('ThemVaCapNhatLike/{id}','publicDetail@ThemVaCapNhatLike');
 
 //============ check like
 Route::get('checkLike/userid={d}&svid={s}','publicDetail@checkLike');
@@ -129,20 +140,34 @@ Route::get('city-all/id={id}&district={dis}&type={type}&fil={fil}&page={page}&li
 
 // =============== user info ===========
 Route::get('info','accountController@get_info_account')->name('info');
+Route::post('info',['as'=>'postinfo','uses'=>'accountController@post_edit_info_account']);
+
+
+
+//test
+
+Route::get('getRating/{id}','publicDetail@getRating');
+Route::get('checkUserRating/{idservice}&user_id={id}','publicDetail@checkUserRating');
+
+Route::get('check-login','publicDetail@check_Login');
 
 
 
 
+//====== place user
+Route::get('place-user','accountController@getPlace_user');
+Route::get('place-user/add/{id}','accountController@addplace');
+
+//====== place user
+
+Route::get('service-user','accountController@getservice_user');
+Route::get('service-user/add/{id}','accountController@addservice_user');
+
+//get con search
+Route::get('conSearch/{idcity}&type={type}&keyword={key}&select={select}','pageController@conSearch');
 
 
-
-
-
-
-
-
-
-
+//=========
 
 
 

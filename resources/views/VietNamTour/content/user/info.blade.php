@@ -8,15 +8,52 @@
 <link rel="stylesheet" href="public/resource/css/detail-tab.css">
 <link rel="stylesheet" href="public/resource/css/user.css">
 
+<script>
+	       $(document).ready( function() {
+    	$(document).on('change', '.btn-file :file', function() {
+		var input = $(this),
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+		input.trigger('fileselect', [label]);
+		});
 
+		$('.btn-file :file').on('fileselect', function(event, label) {
+		    
+		    var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+		    
+		    if( input.length ) {
+		        input.val(log);
+		    } else {
+		        if( log ) alert(log);
+		    }
+	    
+		});
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        
+		        reader.onload = function (e) {
+		            $('#img-upload').attr('src', e.target.result);
+		        }
+		        
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		$("#imgInp").change(function(){
+		    readURL(this);
+		}); 	
+	});
+</script>
 	<section class="content-info">
 		<div class="container">
 			<div class="content">
 				<div class="row">
+				
 					<div class="col-md-3 ">
 						<div class="left-user">
 							<div class="avatar">
-								<img src="public/resource/images/avatar1.jpg" alt="">
+								<img id='img-upload' src="{{asset('public/resource/images/avatar/'.$info->contact_avatar)}}" alt="">
 								{{-- <h5 class="text-center">Lam The Men</h5> --}}
 							</div>
 							<div class="options">
@@ -39,36 +76,54 @@
 						<div class="right-user">
 							<div class="info-account">
 								<h4 class="text-center" style="margin-top: 10px;"><b>THÔNG TIN TÀI KHOẢN</b></h4>
-								<form class="form-info">
-									
+								<form class="form-info" action="" method="post" enctype='multipart/form-data'>
+									<input type="hidden" name="_token" value="{{csrf_token()}}">
 									<div class="form-row">
 										<div class="form-group col-md-6">
 											<label for="inputEmail4">Họ và tên</label>
-											<input type="text" class="form-control" id="" placeholder="Họ tên" value="{{$info->contact_name}}">
+											<input name="name" type="text" class="form-control" id="" placeholder="Họ tên" value="{{$info->contact_name}}">
+											<p class="text-danger">{{$errors->first('name')}}</p>
 										</div>
 										<div class="form-group col-md-6">
 											<label for="inputPassword4">Email</label>
-											<input type="email" class="form-control" id="" placeholder="Email" value="{{$info->contact_email_address}}">
+											<input name="email" type="email" class="form-control" id="" placeholder="Email" value="{{$info->contact_email_address}}">
+											<p class="text-danger">{{$errors->first('email')}}</p>
 										</div>
 									</div>
 									<div class="form-row">
 										<div class="form-group col-md-6">
 											<label for="inputEmail4">Số điện thoại</label>
-											<input type="text" class="form-control" id="" placeholder="Điện thoại" value="{{$info->contact_phone}}">
+											<input name="phone" type="number" class="form-control" id="" placeholder="Điện thoại" value="{{$info->contact_phone}}">
+											<p class="text-danger">{{$errors->first('phone')}}</p>
 										</div>
 										<div class="form-group col-md-6">
 											<label for="inputPassword4">Website</label>
-											<input type="text" class="form-control" id="" placeholder="Website" value="{{$info->contact_website}}">
+											<input name="website" type="text" class="form-control" id="" placeholder="Website" value="{{$info->contact_website}}">
+											<p class="text-danger">{{$errors->first('website')}}</p>
 										</div>
 									</div>
 									<div class="form-row">
 										<div class="form-group col-md-12">
-											<label for="inputState">Địa chỉ</label>
-											<input type="text" class="form-control" id="" placeholder="Địa chỉ"value="{{$info->contact_name}}">
-										</div>
+									
+											<div class="input-group">
+												<span class="input-group-btn">
+													<span class="btn btn-primary btn-file">
+														Chọn tệp… <input type="file" id="imgInp" name="image" value="" >
+														
+													</span>
+												</span>
+												<input type="text" class="form-control" value="" readonly>
+											
+												
+											</div>
+											<p class="text-danger">{{ $errors->first('image') }}</p>
+										</div>	
+									
+								
+									
 										<div class="form-group col-md-6">
 											<label for="inputState">Ngôn ngữ</label>
-											<select id="inputState" class="form-control">
+											<select name="lang" id="inputState" class="form-control">
 												<option value="Việt Nam" selected>Việt Nam</option>
 												<option value="Nước ngoài">Nước ngoài</option>
 											</select>

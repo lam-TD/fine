@@ -1,6 +1,8 @@
 var id_tinh = null;
 
 $(document).ready(function () {
+	clickSearch();
+
 	// load select city
 		$.ajax({
 			url: 'http://chinhlytailieu/vntour_api/count_city_service_all',
@@ -32,6 +34,9 @@ function gantentinh() {
 			document.getElementById('a-tinhTP').setAttribute("data-id",id);
 			document.getElementById('a-tinhTP').setAttribute("data-name",this.getAttribute('data-name'));
 			id_tinh = $('#a-tinhTp').attr('data-idtinh');
+			
+			
+
 		}
 	}
 }
@@ -297,5 +302,31 @@ function search_type(url, image,name,description) { //
 	eat +=	'</div>';
 	return eat;
 }
+
+//========
+function clickSearch() {
+
+	$('#btnsearchNhe').click(function () {
+
+		var keyword = $('#text-search-top').val();
+		console.log(keyword.length);
+		if (keyword.length > 0) 
+		{
+			var keyword_handle = keyword.replace(" ","+");
+
+			$('input[name=city]').val($('#a-tinhTP').attr('data-id'));
+			$('input[name=type]').val($('#a-danhmuc').attr('data-type'));
+			console.log("hellose");
+
+			$('form').submit(function () {
+				
+			})
+		}
+		else{
+			alert('Bạn cần nhập nội dung để tìm kiếm!!!');
+		}
+	})
+}
+
 
 //=============== LUU search neu co login

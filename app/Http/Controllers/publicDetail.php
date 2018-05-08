@@ -7,7 +7,10 @@ use DB;
 use App\touristPlacesModel;
 use App\likesModel;
 use App\servicesModel;
+use App\ratingsModel;
 use GuzzleHttp\Client;
+use Session;
+use Carbon;
 class publicDetail extends Controller
 {
     public function get_detail($id,$type)
@@ -16,12 +19,24 @@ class publicDetail extends Controller
     	$sv = $this::get_service_id($id,$type);
 
         $sv_lancan = $this::dichvu_lancan($sv->city_id,$id,20);
-        // dd($sv_lancan);
+        $rating = $this::getRating($id);
+        // dd($rating);
+        $checklogin = $this::check_Login();
+        if ($checklogin != null) {
+            $checkUserRating = $this::checkUserRating($id,$checklogin);
+            if (count($checkUserRating) == 0) {
+                $checkUserRating = null;
+            }
+        }
+        else{
+            $checkUserRating = null;
+        }
+        // return $checkUserRating;
     	if ($sv == null) {
     		return view('VietNamTour.404');
     	}
     	else{
-    		return view('VietNamTour.content.detail', compact('sv','sv_lancan'));
+    		return view('VietNamTour.content.detail', compact('sv','sv_lancan','rating','checklogin','checkUserRating'));
     	}
     }
 
@@ -269,6 +284,87 @@ class publicDetail extends Controller
             'timeout'  => 5.0,
         ]);
         $response = $client->request('GET',"dichvu_lancan/idcity={$idcity}&id={$id}&limit={$limit}");
+
+        return json_decode($response->getBody()->getContents());
+    }
+
+    public function getRating($idservice)
+    {
+        // $result = DB::select("SELECT vr_title, vr_ratings_details,vr_rating,user_id,service_id,created_at,username FROM `vnt_visitor_ratings` AS r INNER JOIN vnt_user AS i ON r.user_id = i.user_id WHERE r.service_id = '$idservice'");
+
+        $result = DB::table('vnt_visitor_ratings')
+                    ->join('vnt_user','vnt_visitor_ratings.user_id','=','vnt_user.user_id')
+                    ->leftjoin('vnt_contact_info','vnt_visitor_ratings.user_id','=','vnt_contact_info.user_id')
+                    ->select('vr_title','vr_ratings_details','vr_rating','vnt_visitor_ratings.user_id','service_id','vnt_visitor_ratings.created_at','username','contact_avatar')
+                    ->where('service_id',$idservice)->get();
+        return $result;
+    }
+
+    public function check_Login()
+    {
+        if (Session::has('login') && Session::get('login')) 
+        {
+            // $result = Session::get('user_info');
+            $result = Session::get('user_info')->id;
+        }
+        else{ $result = null ; }
+        return json_encode($result);
+    }
+
+    public function checkUserRating($idservice,$iduser)
+    {
+        $result = DB::table('vnt_visitor_ratings')
+                    ->join('vnt_user','vnt_visitor_ratings.user_id','=','vnt_user.user_id')
+                    ->leftjoin('vnt_contact_info','vnt_visitor_ratings.user_id','=','vnt_contact_info.user_id')
+                    ->select('vr_title','vr_ratings_details','vr_rating','vnt_visitor_ratings.user_id','service_id','vnt_visitor_ratings.created_at','username','contact_avatar')
+                    ->where('service_id',$idservice)
+                    ->where('vnt_visitor_ratings.user_id',$iduser)
+                    ->orderBy('vnt_visitor_ratings.created_at','desc')
+                    ->limit(10)
+                    ->get();
+        return $result;
+    }
+
+    public function save_rating($id_service, $rating, $detail)
+    {
+        $ra = (int)$rating;
+        $user_id = $this::check_Login();
+        $rating = new ratingsModel();
+        $rating->vr_title = "d";
+        $rating->vr_ratings_details = $detail;
+        $rating->vr_rating = $ra;
+        $rating->user_id = $user_id;
+        $rating->service_id = $id_service;
+
+        $mytime = Carbon\Carbon::now();
+        $rating->created_at = $mytime->toDateTimeString();
+
+        $rating->save();
+
+        return 1;
+    }
+
+    public function save_update_rating($id_service, $rating, $detail)
+    {
+        $user_id = $this::check_Login();
+        $mytime = Carbon\Carbon::now();
+        DB::table('vnt_visitor_ratings')
+            ->where('user_id', $user_id)
+            ->where('service_id', $id_service)
+            ->update(['vr_rating' => $rating, 'vr_ratings_details' => $detail,'created_at' => $mytime->toDateTimeString()]);
+        return 1;
+    }
+
+    public function ThemVaCapNhatLike($idservice)
+    {
+        $user_id = $this::check_Login();
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'http://chinhlytailieu/vntour_api/',
+            // You can set any number of default request options.
+            'timeout'  => 5.0,
+        ]);
+        $response = $client->request('GET',"ThemVaCapNhatLike/{$idservice}&user={$user_id}");
 
         return json_decode($response->getBody()->getContents());
     }
