@@ -135,6 +135,36 @@ class accountController extends Controller
     }
 
 
+    public function register_uplevel_user(edituser $request)
+    {
+        $client = new Client([
+                    // Base URI is used with relative requests
+                    'base_uri' => 'http://chinhlytailieu/vntour_api/',
+                    // You can set any number of default request options.
+                    'timeout'  => 20.0,
+                ]);
+
+        $response = $client->request('POST', 'edituser/'.$user_id.'', [
+                    'form_params' => [
+                        'name' => $request->name,
+                    ]
+                ])->getBody();
+    }
+
+
+    public function get_quyen_dangky() // lay ra nhung quyen nguoi dung co the dang ky
+    {
+        $client = new Client([
+                    // Base URI is used with relative requests
+                    'base_uri' => 'http://chinhlytailieu/vntour_api/',
+                    // You can set any number of default request options.
+                    'timeout'  => 20.0,
+                ]);
+        $response = $client->request('GET',"get_info_user/{$user_id}");
+    }
+
+
+
     public function getPlace_user()
     {
         return view('VietNamTour.content.user.place.place_user');

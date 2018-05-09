@@ -271,10 +271,12 @@
 									<li class="nav-item" style="position: relative; margin-right: 2px;">
 											<!-- hien thi khi dang nhap thanh cong -->
 											<a class="nav-link btn-login" style="padding: 0; border: none !important;" id="id-user-form">
-												<img src="public/resource/images/@if(Session::get('user_info')->avatar == null)
-													avatar2.jpg
-													@else {{Session::get('user_info')->avatar}}
-												@endif" alt="" style="height: 33px; width: 33px;">
+												@if(Session::get('user_info')->avatar == null)
+													<img src="public/resource/images/avatar2.jpg" style="height: 33px; width: 33px;">
+												@else
+													<img src="public/resource/images/avatar/{{Session::get('user_info')->avatar}}" style="height: 33px; width: 33px;">
+												@endif
+												
 												{{Session::get('user_info')->username}} <i class="fas fa-caret-down"></i>
 											</a>
 											<div class="user-form">

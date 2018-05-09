@@ -155,7 +155,7 @@ class pageController extends Controller
         ]);
         $response = $client->request('GET',"logoutW");
         Session()->flush();
-        return redirect()->back();
+        return redirect('/');
     }
 
     // api
